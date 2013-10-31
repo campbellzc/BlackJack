@@ -4,11 +4,11 @@ public class Card {
 	private String suit;
 	//private int number;
 	int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
- 	public Card(String card, int value, String suit) {
+ 	public Card(int value, String suit) {
 		setCard(card);
 		setSuit(suit);
 		setValue(value);
-		System.out.println("" + this.card + " of " + this.suit);
+		//System.out.println("" + this.value + " of " + this.suit);
 
 	}
 	public String getCard() {
