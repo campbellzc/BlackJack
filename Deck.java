@@ -11,7 +11,20 @@ public class Deck {
 			if (x > 10) {
 				i = 10;
 			}
-			Card newCard = new Card(i, "Hearts");
+			Card newCard = new Card(x, i, "Hearts");
+			// if (x=11) {
+			// 	i = 10;
+			// 	Card newCard = new Card(i, "Hearts", 11);
+			// }
+			// if (x=12) {
+			// 	i = 10;
+			// 	Card newCard = new Card(i, "Hearts", 12);
+			// }
+			// if (x=13) {
+			// 	i=10;
+			// 	Card newCard = new Card(i, "Hearts", 13);
+			// }
+			
 			
 			
 			cards[x-1] = newCard;
@@ -22,7 +35,7 @@ public class Deck {
 			if (x > 10) {
 				i = 10;
 			}
-			Card newCard = new Card(i, "Spades");
+			Card newCard = new Card(x, i, "Spades");
 			
 			
 			cards[x+12] = newCard;
@@ -33,7 +46,7 @@ public class Deck {
 			if (x > 10) {
 				i = 10;
 			}
-			Card newCard = new Card(i, "Clubs");
+			Card newCard = new Card(x, i, "Clubs");
 			
 			
 			cards[x+25] = newCard;
@@ -45,7 +58,7 @@ public class Deck {
 				i = 10;
 
 			}
-			Card newCard = new Card(i, "Diamonds");
+			Card newCard = new Card(x, i, "Diamonds");
 			
 			
 			cards[x+38] = newCard;
@@ -59,15 +72,11 @@ public class Deck {
 		
 	}
 	public void shuffle() {
-		
-
 		for (int i = cards.length-1; i>0; i--) {
 			Card a = cards[i];
 			int temp = random.nextInt(i);
 			cards[i] = cards[temp];
 			cards[temp] = a;
-			
-
 		}
 		print();
 	}
