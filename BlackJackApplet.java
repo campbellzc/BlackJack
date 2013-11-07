@@ -3,14 +3,14 @@ import java.applet.*;
 
 public class BlackJackApplet extends Applet {
 
-	private Card poster;
+	private Deck table;
 
 	public void init() {
-		poster = new Card("card");
+		table = new Deck();
 	}
 
 	public void paint(Graphics g) {
-		poster.draw(g, new Rectangle(50, 50, 200, 300));
+		table.draw(g);
 	}
 
 }

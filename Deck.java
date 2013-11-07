@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Deck {
 	private String suit;
@@ -12,19 +14,6 @@ public class Deck {
 				i = 10;
 			}
 			Card newCard = new Card(x, i, "Hearts");
-			// if (x=11) {
-			// 	i = 10;
-			// 	Card newCard = new Card(i, "Hearts", 11);
-			// }
-			// if (x=12) {
-			// 	i = 10;
-			// 	Card newCard = new Card(i, "Hearts", 12);
-			// }
-			// if (x=13) {
-			// 	i=10;
-			// 	Card newCard = new Card(i, "Hearts", 13);
-			// }
-			
 			
 			
 			cards[x-1] = newCard;
@@ -64,7 +53,7 @@ public class Deck {
 			cards[x+38] = newCard;
 
 		}
-		shuffle();
+		//shuffle();
 		// suit("Diamonds");
 		// suit("Clubs");
 		// suit("Spades");
@@ -83,6 +72,13 @@ public class Deck {
 	public void print() {
 		for (int i = 0; i<cards.length; i++) {
 			System.out.println(cards[i].getValue() + " of " + cards[i].getSuit());
+		}
+	}
+	public void draw(Graphics g) {
+		int xOffset = 50;
+		for (int i = 0; i<cards.length; i++) {
+			cards[i].draw(g, new Rectangle(xOffset, 50, 200, 300));
+			xOffset += 25;
 		}
 	}
 	//public void suit(String suit) {
