@@ -77,7 +77,13 @@ public class Deck {
 	public void draw(Graphics g) {
 		int xOffset = 50;
 		for (int i = 0; i<cards.length; i++) {
-			cards[i].draw(g, new Rectangle(xOffset, 50, 200, 300));
+			cards[i].draw(g, new Rectangle(xOffset, 50, 150, 300));
+			xOffset += 25;
+		}
+		shuffle();
+		xOffset = 50;
+		for (int i = 0; i<cards.length; i++) {
+			cards[i].draw(g, new Rectangle(xOffset, 150, 150, 300));
 			xOffset += 25;
 		}
 	}

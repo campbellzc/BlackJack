@@ -93,5 +93,8 @@ public class Card {
 		}
 		return image;
 	}
+	public String faceAndSuit() {
+		return this.getFace() + this.getSuit();
+	}
 
 }
