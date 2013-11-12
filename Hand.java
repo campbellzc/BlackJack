@@ -11,13 +11,14 @@ public class Hand {
 		this.maxHand[0] = firstCard;
 		this.amountOfCards = 1;
 	}
-
+	
 	public void draw(Graphics g) {
 		int y = 50;
 		for (int i = 0; i < amountOfCards; i++) {
 			this.maxHand[i].draw(g, new Rectangle(y, 50, 200, 300));
 			y+=250;
 		}
+
 	}
 	public void addACard(Card x) {
 		if (amountOfCards < 11) {

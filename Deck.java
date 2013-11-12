@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 public class Deck {
 	private String suit;
+	int cardsDealt = 0;
 	Random random = new Random();
 	Card[] cards = new Card[52];
 	public Deck() {
@@ -53,7 +54,7 @@ public class Deck {
 			cards[x+38] = newCard;
 
 		}
-		//shuffle();
+		shuffle();
 		// suit("Diamonds");
 		// suit("Clubs");
 		// suit("Spades");
@@ -71,7 +72,7 @@ public class Deck {
 	}
 	public void print() {
 		for (int i = 0; i<cards.length; i++) {
-			System.out.println(cards[i].getValue() + " of " + cards[i].getSuit());
+			System.out.println(cards[i].getValue() + " of " + cards[i].getSuit() + " value = " + cards[i].getValue());
 		}
 	}
 	public void draw(Graphics g) {
@@ -86,6 +87,10 @@ public class Deck {
 			cards[i].draw(g, new Rectangle(xOffset, 150, 150, 300));
 			xOffset += 25;
 		}
+	}
+	public Card deal() {
+		cardsDealt++;
+		return cards[cardsDealt-1];
 	}
 	//public void suit(String suit) {
 		// Card ace = new Card("Ace", 1, suit);
