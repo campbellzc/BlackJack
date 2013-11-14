@@ -13,10 +13,10 @@ public class Hand {
 	}
 	
 	public void draw(Graphics g) {
-		int y = 50;
+		int x = 50;
 		for (int i = 0; i < amountOfCards; i++) {
-			this.maxHand[i].draw(g, new Rectangle(y, 50, 200, 300));
-			y+=250;
+			this.maxHand[i].draw(g, new Rectangle(x, 50, 200, 300));
+			x+=250;
 		}
 
 	}

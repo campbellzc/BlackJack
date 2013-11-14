@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 public class Deck {
 	private String suit;
-	int cardsDealt = 0;
+	int cardsDealt = 1;
 	Random random = new Random();
 	Card[] cards = new Card[52];
 	public Deck() {
@@ -14,10 +14,17 @@ public class Deck {
 			if (x > 10) {
 				i = 10;
 			}
-			Card newCard = new Card(x, i, "Hearts");
+			if (x == 1) {
+				Card newCard = new Card(x, 1, 11, "Hearts");
+				cards[x-1] = newCard;
+			} else {
+				Card newCard = new Card(x, i, "Hearts");
+				cards[x-1] = newCard;
+			}
 			
 			
-			cards[x-1] = newCard;
+			
+			
 
 		}
 		for (int x = 1; x<=13; x++) {
@@ -25,10 +32,17 @@ public class Deck {
 			if (x > 10) {
 				i = 10;
 			}
-			Card newCard = new Card(x, i, "Spades");
+			if (x == 1) {
+				Card newCard = new Card(x, 1, 11, "Spades");
+				cards[x+12] = newCard;
+			} else {
+				Card newCard = new Card(x, i, "Spades");
+				cards[x+12] = newCard;
+			}
 			
 			
-			cards[x+12] = newCard;
+			
+			
 
 		}
 		for (int x = 1; x<=13; x++) {
@@ -36,10 +50,16 @@ public class Deck {
 			if (x > 10) {
 				i = 10;
 			}
-			Card newCard = new Card(x, i, "Clubs");
+			if (x == 1) {
+				Card newCard = new Card(x, 1, 11, "Clubs");
+				cards[x+25] = newCard;
+			} else {
+				Card newCard = new Card(x, i, "Clubs");
+				cards[x+25] = newCard;
+			}
 			
 			
-			cards[x+25] = newCard;
+			
 
 		}
 		for (int x = 1; x<=13; x++) {
@@ -48,10 +68,16 @@ public class Deck {
 				i = 10;
 
 			}
-			Card newCard = new Card(x, i, "Diamonds");
+			if (x == 1) {
+				Card newCard = new Card(x, 1, 11, "Diamonds");
+				cards[x+38] = newCard;
+			} else {
+				Card newCard = new Card(x, i, "Diamonds");
+				cards[x+38] = newCard;
+			}
 			
 			
-			cards[x+38] = newCard;
+			
 
 		}
 		shuffle();

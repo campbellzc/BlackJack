@@ -27,9 +27,9 @@ public class Card {
 
 	}
 	public Card(int faceNumber, int value, int value2, String suit) {
-		this.suit = suit;
-		this.value = value;
-		this.value2 = value2;
+		setSuit(suit);
+		setValue(value);
+		setValue2(value2);
 		this.faceNumber = faceNumber;
 		this.image = Card.loadImage(getFaceNumber() + suit);
 	}
@@ -55,6 +55,12 @@ public class Card {
 	}
 	public void setCard(String card) {
 		this.card = card;
+	}
+	public int getValue2() {
+		return this.value2;
+	}
+	public void setValue2(int value2) {
+		this.value2 = value2;
 	}
 	public int getValue() {
 		return this.value;
