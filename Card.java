@@ -15,6 +15,7 @@ public class Card {
 	private Image image;
 	private String name;
 	private int value2;
+	private Image backOfCard;
 	//private int number;
 	//int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
  	public Card(int faceNumber, int value, String suit) {
@@ -23,6 +24,7 @@ public class Card {
 		setValue(value);
 		this.faceNumber = faceNumber;
 		this.image = Card.loadImage(getFaceNumber() + suit);
+		this.backOfCard = Card.loadImage("back-blue");
 		//System.out.println("" + this.value + " of " + this.suit);
 
 	}
@@ -83,6 +85,9 @@ public class Card {
 
 	public void draw(Graphics g, Rectangle r) {
 		g.drawImage(image, r.x, r.y, r.width, r.height, null);
+	}
+	public void drawBackOfCard(Graphics g, Rectangle r) {
+		g.drawImage(backOfCard, r.x, r.y, r.width, r.height, null);
 	}
 	private static Image loadImage(String name) {
 		String path = null;

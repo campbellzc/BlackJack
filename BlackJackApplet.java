@@ -7,21 +7,24 @@ public class BlackJackApplet extends Applet {
 
 	private Deck table;
 	private Hand player;
-	
+	private int totalValue;
+	private int ace;
+	private Hand dealer;
 	public void init() {
-		int totalValue = 0;
+		this.totalValue = 0;
 		table = new Deck();
-		player = new Hand(table.cards[0]);
-		int ace = 0;
+		player = new Hand(table.deal());
+		dealer = new Hand(table.deal());
+		this.ace = 0;
 		if (table.deal().getValue() == 1) {
-			totalValue = table.cards[0].getValue2();
-			ace = 1;
+			this.totalValue = table.deal().getValue2();
+			this.ace = 1;
 		} else	{
-			totalValue = table.cards[0].getValue();
+			this.totalValue = table.deal().getValue();
 		}
 		
 		//for (int i = 1; i < totalValue; i++) {
-		runHand(totalValue, ace);
+		//runHand(totalValue, ace);
 		
 			
 		
@@ -41,7 +44,8 @@ public class BlackJackApplet extends Applet {
 
 	public void paint(Graphics g) {
 		//table.draw(g);
-		player.draw(g);
+		player.drawPlayer(g, runHand(totalValue, ace));
+		dealer.drawDealer(g, runHand(totalValue, ace));
 	}
 	public int runHand(int totalValue, int ace) {
 		//int x = 1;
@@ -59,12 +63,12 @@ public class BlackJackApplet extends Applet {
 					}
 
 				} else {
-					System.out.println("normal card value");
+					
 					totalValue += theCard.getValue();
 				}
 				if (totalValue > 21) {
 					if (ace == 1) {
-						System.out.println("ace is true");
+						
 						totalValue = totalValue - 10;
 						
 					} else {
@@ -85,6 +89,7 @@ public class BlackJackApplet extends Applet {
 
 			
 			}
+			
 			
 
 		//}
