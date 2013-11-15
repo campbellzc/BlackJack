@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 public class Deck {
 	private String suit;
-	int cardsDealt = 1;
+	int cardsDealt = 0;
 	Random random = new Random();
 	Card[] cards = new Card[52];
 	public Deck() {
