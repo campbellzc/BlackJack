@@ -2,8 +2,9 @@ import java.awt.*;
 import java.applet.*;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
-public class BlackJackApplet extends Applet {
+import java.swing.*;
+import java.awt.event.*;
+public class BlackJackApplet extends Applet implements ActionListener {
 
 	private Deck table;
 	private Hand player;
@@ -13,14 +14,16 @@ public class BlackJackApplet extends Applet {
 	public void init() {
 		this.totalValue = 0;
 		table = new Deck();
-		player = new Hand(table.deal());
-		dealer = new Hand(table.deal());
+		player = new Player(table.deal());
+		dealer = new Dealer(table.deal());
+		player.addACard(table.deal());
+		dealer.addACard(table.deal());
 		this.ace = 0;
-		if (table.deal().getValue() == 1) {
-			this.totalValue = table.deal().getValue2();
+		if (table.cards[0].getValue() == 1) {
+			this.totalValue = table.cards[0].getValue2();
 			this.ace = 1;
 		} else	{
-			this.totalValue = table.deal().getValue();
+			this.totalValue = table.cards[0].getValue();
 		}
 		
 		//for (int i = 1; i < totalValue; i++) {
@@ -44,58 +47,11 @@ public class BlackJackApplet extends Applet {
 
 	public void paint(Graphics g) {
 		//table.draw(g);
-		player.drawPlayer(g, runHand(totalValue, ace));
-		dealer.drawDealer(g, runHand(totalValue, ace));
+		player.drawPlayer(g, runPlayer(totalValue, ace));
+		dealer.draw(g, runDealer(totalValue, ace));
 	}
-	public int runHand(int totalValue, int ace) {
-		//int x = 1;
-		//while (x == 1) {
-			while (totalValue < 21) {
-				Card theCard = table.deal();
-				player.addACard(theCard);
-				if (theCard.getValue() == 1) {
-					if ((totalValue + 11) <= 21) {
-						totalValue += theCard.getValue2();
-						ace = 1;
-					} else {
-						totalValue += theCard.getValue();
-						ace = 0;
-					}
-
-				} else {
-					
-					totalValue += theCard.getValue();
-				}
-				if (totalValue > 21) {
-					if (ace == 1) {
-						
-						totalValue = totalValue - 10;
-						
-					} else {
-						System.out.println("ace is false. should do nothing");
-					}
-					ace = 0;
-				
-				}
-			// if (ace = true ) {
-				
-			// 		totalValue -= 10;
-			// 		ace = false;
-				
-				
-			// }
-				System.out.println(totalValue);
-				
-
-			
-			}
-			
-			
-
-		//}
-		
-
-		return totalValue;
-	}
+	
+	
+	
 
 }

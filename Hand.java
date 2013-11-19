@@ -11,7 +11,6 @@ public class Hand {
 		this.maxHand[0] = firstCard;
 		this.amountOfCards = 1;
 	}
-	
 	public void drawPlayer(Graphics g, int totalValue) {
 		int x = 50;
 		for (int i = 0; i < amountOfCards; i++) {
@@ -23,15 +22,18 @@ public class Hand {
 	}
 	public void drawDealer(Graphics g, int totalValue) {
 		int xOffset = 50;
+		System.out.println(amountOfCards + "this is the amount of cards.");
 		for (int i = 0; i < amountOfCards; i++) {
 			if (i == 0) {
 				maxHand[i].drawBackOfCard(g, new Rectangle(xOffset, 500, 200, 300));
 			} else {
+				System.out.println("swaggaliciousness");
 				maxHand[i].draw(g, new Rectangle(xOffset, 500, 200, 300));
 			}
 			xOffset += 250;
 
 		}
+
 		g.drawString("Total: " + totalValue, 40, 820);
 		
 

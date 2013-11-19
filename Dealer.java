@@ -1,11 +1,12 @@
-public class Player {
-	public Player() {
+public class Dealer {
+	public Dealer(Card firstCard) {
+		dealersHand = new Hand(firstCard);
 		
 	}
-	public int runPlayer(int totalValue, int ace) {
-			while (totalValue < 21) {
+	public int runDealer(int totalValue, int ace) {
+			while (totalValue < 17) {
 				Card theCard = table.deal();
-				player.addACard(theCard);
+				dealer.addACard(theCard);
 				if (theCard.getValue() == 1) {
 					if ((totalValue + 11) <= 21) {
 						totalValue += theCard.getValue2();
@@ -36,5 +37,8 @@ public class Player {
 			}
 
 		return totalValue;
+	}
+	public void draw(Graphics g, int totalValue) {
+		dealersHand.drawDealer(g, runDealer(totalValue, ace));
 	}
 }
