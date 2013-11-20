@@ -50,23 +50,23 @@ public class BlackJackApplet extends Applet {
 	public int runHand(int totalValue, int ace) {
 		//int x = 1;
 		//while (x == 1) {
-			while (totalValue < 21) {
+			while (this.totalValue < 21) {
 				Card theCard = table.deal();
 				player.addACard(theCard);
 				if (theCard.getValue() == 1) {
-					if ((totalValue + 11) <= 21) {
-						totalValue += theCard.getValue2();
+					if ((this.totalValue + 11) <= 21) {
+						this.totalValue += theCard.getValue2();
 						ace = 1;
 					} else {
-						totalValue += theCard.getValue();
+						this.totalValue += theCard.getValue();
 						ace = 0;
 					}
 
 				} else {
 					
-					totalValue += theCard.getValue();
+					this.totalValue += theCard.getValue();
 				}
-				if (totalValue > 21) {
+				if (this.totalValue > 21) {
 					if (ace == 1) {
 						
 						totalValue = totalValue - 10;
@@ -95,7 +95,7 @@ public class BlackJackApplet extends Applet {
 		//}
 		
 
-		return totalValue;
+		return this.totalValue;
 	}
 
 }

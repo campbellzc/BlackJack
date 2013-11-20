@@ -34,6 +34,7 @@ public class Card {
 		setValue2(value2);
 		this.faceNumber = faceNumber;
 		this.image = Card.loadImage(getFaceNumber() + suit);
+		this.backOfCard = Card.loadImage("back-blue");
 	}
 	public String getFaceNumber() {
 		
