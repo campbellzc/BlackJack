@@ -108,7 +108,7 @@ public class BlackJackApplet extends Applet implements ActionListener{
 		if ("Double Down".equals(ae.getActionCommand())) {
 			
 		}
-		if ("Bet 10".equals(ae.getActionCommand())) {
+		if ("Bet $10".equals(ae.getActionCommand())) {
 			
 		}
 	}
