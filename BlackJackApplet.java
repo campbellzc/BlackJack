@@ -12,11 +12,17 @@ public class BlackJackApplet extends Applet implements ActionListener{
 	private int totalValue;
 	private int ace;
 	private Dealer dealer;
-	private JButton hit, stay, doubleDown, newGame;
+	private JButton hit, stay, doubleDown, newGame, bet10;
 	private int totalValueD;
-	
+	private int yourMoney;
+	private int pot;
 	public void init() {
 		//Card card = table.deal();
+		int yourMoney = 1000;
+		int pot = 0;
+		
+		
+		
 		
 		String title = "Hit";
 		hit = new JButton(title);
@@ -36,6 +42,18 @@ public class BlackJackApplet extends Applet implements ActionListener{
 		newGame.addActionListener(this);
 		this.add(newGame);
 
+		title = "Double Down";
+		doubleDown = new JButton(title);
+		doubleDown.setActionCommand(title);
+		doubleDown.addActionListener(this);
+		this.add(doubleDown);
+		
+		title = "Bet $10";
+		bet10 = new JButton(title);
+		bet10.setActionCommand(title);
+		bet10.addActionListener(this);
+		this.add(bet10);
+		
 		this.totalValue = 0;
 		table = new Deck();
 		
@@ -86,6 +104,12 @@ public class BlackJackApplet extends Applet implements ActionListener{
 		if ("New Game".equals(ae.getActionCommand())) {
 			init();
 			repaint();
+		}
+		if ("Double Down".equals(ae.getActionCommand())) {
+			
+		}
+		if ("Bet 10".equals(ae.getActionCommand())) {
+			
 		}
 	}
 	
