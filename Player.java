@@ -20,7 +20,7 @@ public class Player {
 	
 
 	public void runPlayer(Graphics g, int totalValue) {
-		playersHand.drawPlayer(g, totalValue);
+		playersHand.drawPlayer(g);
 	}
 	public int getTotalValueP(int totalValue2, int ace, Card theCard) {
 			

@@ -25,6 +25,10 @@ public class Card {
 		this.faceNumber = faceNumber;
 		this.image = Card.loadImage(getFaceNumber() + suit);
 		this.backOfCard = Card.loadImage("back-blue");
+		value2 = value;
+		if (value == 1) {
+			value2 = 11;
+		}
 		//System.out.println("" + this.value + " of " + this.suit);
 
 	}
@@ -35,6 +39,9 @@ public class Card {
 		this.faceNumber = faceNumber;
 		this.image = Card.loadImage(getFaceNumber() + suit);
 		this.backOfCard = Card.loadImage("back-blue");
+	}
+	public void switchCardFace() {
+		this.backOfCard = this.image;
 	}
 	public String getFaceNumber() {
 		

@@ -118,10 +118,10 @@ public class Deck {
 		cardsDealt++;
 		return cards[cardsDealt-1];
 	}
-	public Card deal2() {
-		cardsDealt++;
-		return cards[cardsDealt-2];
-	}
+	// public Card deal2() {
+	// 	cardsDealt++;
+	// 	return cards[cardsDealt-2];
+	// }
 	//public void suit(String suit) {
 		// Card ace = new Card("Ace", 1, suit);
 		// Card two = new Card("Two",2, suit);
