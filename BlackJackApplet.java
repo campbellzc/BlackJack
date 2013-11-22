@@ -112,7 +112,7 @@ public class BlackJackApplet extends Applet implements ActionListener{
 				repaint();
 				
 				playerSum = player.playersHand.getTotalValue();
-				System.out.println("totalValue = " + player.playersHand.getTotalValue());
+				System.out.println("totalValue (player)= " + player.playersHand.getTotalValue());
 			System.out.println("playersum = " + playerSum);
 			}
 
@@ -135,7 +135,7 @@ public class BlackJackApplet extends Applet implements ActionListener{
 					
 					repaint();
 					dealerSum = dealer.dealersHand.getTotalValue();
-					System.out.println("totalvalue = " + dealer.dealersHand.getTotalValue());
+					System.out.println("dealertotalvalue = " + dealer.dealersHand.getTotalValue());
 					System.out.println("playersum = " + player.playersHand.getTotalValue());
 					System.out.println("dealersum = " + dealerSum);
 				}
@@ -177,12 +177,14 @@ public class BlackJackApplet extends Applet implements ActionListener{
 		this.pot = pot;
 	}
 	public void first4Cards() {
+		int playerSum = 0;
+		int dealerSum = 0;
 		player = new Player(table.deal());
 		dealer = new Dealer(table.deal());
 		player.playersHand.addACard(table.deal());
 		dealer.dealersHand.addACard(table.deal());
-		int playerSum = player.playersHand.getTotalValue();
-		int dealerSum = dealer.dealersHand.getTotalValue();
+		playerSum = player.playersHand.getTotalValue();
+		dealerSum = dealer.dealersHand.getTotalValue();
 	}
 	public void calculateScore() {
 			if (playerSum < 22 && (dealerSum < playerSum || dealerSum > 21)) {
