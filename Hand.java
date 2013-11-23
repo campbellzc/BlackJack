@@ -36,22 +36,23 @@ public class Hand {
 				maxHand[i].drawBackOfCard(g, new Rectangle(xOffset, 600, 200, 300));
 			} else {
 				//System.out.println("swaggaliciousness");
-				maxHand[i].draw(g, new Rectangle(xOffset, 600, 200, 300));
+				this.maxHand[i].draw(g, new Rectangle(xOffset, 600, 200, 300));
 			}
 			xOffset += 250;
 
 		}
 
-		g.drawString("Total: " + this.getTotalValue(), 40, 920);
+		//g.drawString("Total: " + this.getTotalValue(), 40, 920);
 		
 
 	}
 	public void drawDealer(Graphics g) {
 		int xOffset = 50;
 		for (int i = 0; i<amountOfCards; i++) {
-			maxHand[i].draw(g, new Rectangle(xOffset, 600, 200, 300));
+			this.maxHand[i].draw(g, new Rectangle(xOffset, 600, 200, 300));
+			xOffset += 250;
 		}
-		xOffset += 250;
+		g.drawString("Total: " + this.getTotalValue(), 40, 920);
 	}
 	public void addACard(Card x) {
 		

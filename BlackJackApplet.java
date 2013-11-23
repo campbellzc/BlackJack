@@ -14,13 +14,16 @@ public class BlackJackApplet extends Applet implements ActionListener{
 	private int totalValue;
 	private int ace;
 	private Dealer dealer;
-	private JButton hit, stay, doubleDown, newGame, bet10;
+	private JButton hit, stay, doubleDown, newGame, bet10, doneBet;
 	private int totalValueD;
 	private int wallet;
 	private int pot;
 	private int dealersMoney;
+	private Graphics g;
+	private boolean front = false;
+	private int totalBet;
 	public void init() {
-
+		int totalBet = 0;
 		//Card card = table.deal();
 		setWallet(1000);
 		setPot(0);
@@ -60,30 +63,40 @@ public class BlackJackApplet extends Applet implements ActionListener{
 		bet10.setActionCommand(title);
 		bet10.addActionListener(this);
 		this.add(bet10);
+
+		title = "Done Betting";
+		doneBet = new JButton(title);
+		doneBet.setActionCommand(title);
+		doneBet.addActionListener(this);
+		this.add(doneBet);
 		
 		potLabel = new JLabel("There is $" + getPot() + " in the pot");
 		potLabel.setFont(new Font("sansserif", Font.BOLD, 32));
         this.add(potLabel);
 
-        score = new JLabel("                  Playing...");
+        score = new JLabel("                  Bet Please");
         score.setFont(new Font("sansserif", Font.BOLD, 45));
         this.add(score);
 		
 		this.totalValue = 0;
 		table = new Deck();
 		
+		doubleDown.setEnabled(false);
+		newGame.setEnabled(false);
+		stay.setEnabled(false);
+		hit.setEnabled(false);
 		
-		player = new Player(table.deal());
+		// player = new Player(table.deal());
 		
-		dealer = new Dealer(table.deal());
-		System.out.println("firstCard value" + player.playersHand.maxHand[0].getValue());
+		// dealer = new Dealer(table.deal());
+		// System.out.println("firstCard value" + player.playersHand.maxHand[0].getValue());
 		
-		player.playersHand.addACard(table.deal());
+		// player.playersHand.addACard(table.deal());
 		
 		
-		dealer.dealersHand.addACard(table.deal());
-		int playerSum = player.playersHand.getTotalValue();
-		int dealerSum = dealer.dealersHand.getTotalValue();
+		// dealer.dealersHand.addACard(table.deal());
+		// int playerSum = player.playersHand.getTotalValue();
+		// int dealerSum = dealer.dealersHand.getTotalValue();
 		//System.out.println("secondCard value" + player.playersHand.maxHand[1].getValue());
 		//System.out.println(totalValue);
 		
@@ -96,12 +109,19 @@ public class BlackJackApplet extends Applet implements ActionListener{
 		//table.draw(g);
 		super.paint(g);
 		player.playersHand.drawPlayer(g);
+		if (front == true) {
+			dealer.dealersHand.drawDealer(g);
+		} else {
+			dealer.dealersHand.drawDealerFirst(g);
+		}
+		
 		
 		//player.drawPlayer(g);
-		dealer.dealersHand.drawDealerFirst(g);
+		
 		
 
 	}
+	
 	public void actionPerformed(ActionEvent ae) {
 		if ("Hit".equals(ae.getActionCommand())) {
 			
@@ -114,25 +134,28 @@ public class BlackJackApplet extends Applet implements ActionListener{
 				playerSum = player.playersHand.getTotalValue();
 				System.out.println("totalValue (player)= " + player.playersHand.getTotalValue());
 			System.out.println("playersum = " + playerSum);
+
+				System.out.println("totalValue = " + player.playersHand.getTotalValue());
+				System.out.println("playersum = " + playerSum);
+
 			}
 
 			if (playerSum > 21) {
-				setWallet(getWallet()-getPot());
+				setWallet(getWallet());
 				score.setText("You busted. YOU LOSE!");
-				
+				front = true;
+				repaint();
 			}
 		}
 		if ("Stay".equals(ae.getActionCommand())) {
-			
-			
+			playerSum = player.playersHand.getTotalValue();
+			front = true;
 			if (playerSum > 21) {
 				score.setText("Dealer wins! You Busted.");
 				setWallet(getWallet() - getPot());
-				
 			} else if (playerSum <= 21){
 				while (dealerSum < 17) {
 					dealer.dealersHand.addACard(table.deal());
-					
 					repaint();
 					dealerSum = dealer.dealersHand.getTotalValue();
 					System.out.println("dealertotalvalue = " + dealer.dealersHand.getTotalValue());
@@ -143,24 +166,63 @@ public class BlackJackApplet extends Applet implements ActionListener{
 			}
 		}
 		if ("New Game".equals(ae.getActionCommand())) {
-			first4Cards();
-			score.setText("               Playing...");
+			
+
+			playerSum = 0;
+			dealerSum = 0;
+			repaint();
+			totalBet = 0;
+			front = false;
+			setWallet(getWallet());
+			score.setText("               Bet Again");
 			walletLabel.setText("You currently have: $" + getWallet());
 			setPot(0);
 			potLabel.setText("There is $" + getPot() + " in the pot.");
-			repaint();
-
+			
+			doubleDown.setEnabled(false);
+			newGame.setEnabled(false);
+			stay.setEnabled(false);
+			hit.setEnabled(false);
+			bet10.setEnabled(true);
+			doneBet.setEnabled(true);
+			
 		}
 		if ("Double Down".equals(ae.getActionCommand())) {
-			
+			player.playersHand.addACard(table.deal());
+			playerSum = player.playersHand.getTotalValue();
+			setWallet(getWallet() - totalBet);
+			setPot(getPot() + (totalBet*2));
+			walletLabel.setText("You currently have: $" + getWallet());
+			potLabel.setText("There is $" + getPot() + " in the pot.");
+			if (playerSum > 21) {
+				setWallet(getWallet());
+				score.setText("You busted. YOU LOSE!");
+				front = true;
+				repaint();
+			}
+			if (playerSum < 22) {
+				repaint();
+			}
 		}
 		if ("Bet $10".equals(ae.getActionCommand())) {
 			setWallet(getWallet()-10);
+			totalBet += 10;
 			walletLabel.setText("You currently have: $" + getWallet());
 			setPot(getPot() + 20);
 			potLabel.setText("There is $" + getPot() + " in the pot.");
 			dealersMoney -= 10;
 			
+		}
+		if ("Done Betting".equals(ae.getActionCommand())) {
+			first4Cards();
+			repaint();
+			score.setText("                     Playing....");
+			bet10.setEnabled(false);
+			doneBet.setEnabled(false);
+			doubleDown.setEnabled(true);
+			newGame.setEnabled(true);
+			stay.setEnabled(true);
+			hit.setEnabled(true);
 		}
 	}
 		
@@ -177,14 +239,12 @@ public class BlackJackApplet extends Applet implements ActionListener{
 		this.pot = pot;
 	}
 	public void first4Cards() {
-		int playerSum = 0;
-		int dealerSum = 0;
 		player = new Player(table.deal());
 		dealer = new Dealer(table.deal());
 		player.playersHand.addACard(table.deal());
 		dealer.dealersHand.addACard(table.deal());
-		playerSum = player.playersHand.getTotalValue();
-		dealerSum = dealer.dealersHand.getTotalValue();
+		int playerSum = player.playersHand.getTotalValue();
+		int dealerSum = dealer.dealersHand.getTotalValue();
 	}
 	public void calculateScore() {
 			if (playerSum < 22 && (dealerSum < playerSum || dealerSum > 21)) {
@@ -193,7 +253,7 @@ public class BlackJackApplet extends Applet implements ActionListener{
 				walletLabel.setText("You currently have: $" + getWallet());
 				score.setText("                You win!");
 			} else if ((dealerSum < 22 || playerSum > 21) && playerSum < dealerSum) {
-				setWallet(getWallet()-getPot());
+				setWallet(getWallet());
 				walletLabel.setText("You currently have: $" + getWallet());
 				score.setText("                YOU LOSE!");
 			} else if (playerSum < 22 && dealerSum == playerSum) {
